@@ -48,31 +48,33 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using KeLi.RevitLoader.App.Properties;
 using KeLi.RevitLoader.App.Utils;
 
 namespace KeLi.RevitLoader.App
 {
     public class Program
     {
-        private static string AddinFilename { get; }
+        public static NameValueCollection Setting = ConfigurationManager.AppSettings;
 
-        private static string CurrentFolder { get; } = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        public static string AddinFileName => Setting["AddinFileName"];
 
-        static Program()
-        {
-            AddinFilename = ConfigurationManager.AppSettings["addin"];
-        }
+        public static string AddinNamePattern => Setting["AddinNamePattern"];
+
+        public static string AddinBaseDirPath => Setting["AddinBaseDirPath"];
+
+        public static string CurrentFolder { get; } = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
 
         private static void Main(string[] args)
         {
             try
             {
-                GetAddins(Resources.MyAddin_Pattern).Run(args.Length > 0);
+                GetAddins().Run(args.Length > 0);
             }
             catch (Exception e)
             {
@@ -80,11 +82,11 @@ namespace KeLi.RevitLoader.App
             }
         }
 
-        private static AddinManager GetAddins(string addinPattern)
+        private static AddinManager GetAddins()
         {
             var addins = new AddinManager();
             var versionDlls = new Dictionary<int, string>();
-            var filePaths = Directory.GetFiles(CurrentFolder, addinPattern);
+            var filePaths = Directory.GetFiles(CurrentFolder, AddinNamePattern);
 
             foreach (var filePath in filePaths)
             {
@@ -98,7 +100,7 @@ namespace KeLi.RevitLoader.App
 
             addins.AddinEntries = versionDlls;
 
-            var addinFile = Path.Combine(CurrentFolder, AddinFilename);
+            var addinFile = Path.Combine(CurrentFolder, AddinFileName);
 
             if (File.Exists(addinFile))
                 addins.AddinFilePath = addinFile;

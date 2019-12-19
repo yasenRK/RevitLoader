@@ -49,14 +49,11 @@
 using System;
 using System.IO;
 using System.Security.Principal;
-using KeLi.RevitLoader.App.Properties;
 
 namespace KeLi.RevitLoader.App.Utils
 {
     public class AddinPathUtils
     {
-        private static string RevitFragment { get; } = Resources.Revit_Addins_Path;
-
         private static string AlluserPath { get; set; }
 
         private static string CurrentUserPath { get; set; }
@@ -68,7 +65,7 @@ namespace KeLi.RevitLoader.App.Utils
 
         public static string GetAllUserPath(string revitVersion)
         {
-            return Path.Combine(GetAllUserAppDataPath(), RevitFragment, revitVersion);
+            return Path.Combine(GetAllUserAppDataPath(), Program.AddinBaseDirPath, revitVersion);
         }
 
         public static string GetCurrentUserAppDataPath()
@@ -79,7 +76,7 @@ namespace KeLi.RevitLoader.App.Utils
         public static string GetCurrentUserPath(string revitVersion)
         {
             var appData = GetCurrentUserAppDataPath();
-            var dir = Path.Combine(appData, RevitFragment, revitVersion);
+            var dir = Path.Combine(appData, Program.AddinBaseDirPath, revitVersion);
 
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
