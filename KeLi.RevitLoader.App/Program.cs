@@ -69,7 +69,6 @@ namespace KeLi.RevitLoader.App
 
         public static string CurrentFolder { get; } = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-
         private static void Main(string[] args)
         {
             try

@@ -53,7 +53,7 @@ namespace KeLi.RevitLoader.App.Utils
 {
     public class SerialUtils
     {
-        public static T GetObject<T>(string xmlFile)
+        public static T Deserialize<T>(string xmlFile)
         {
             var serializer = new XmlSerializer(typeof(T));
 
@@ -61,7 +61,7 @@ namespace KeLi.RevitLoader.App.Utils
                 return (T)serializer.Deserialize(reader);
         }
 
-        public static void ToFile(string xmlFile, object obj)
+        public static void Serialize(string xmlFile, object obj)
         {
             var xs = new XmlSerializer(obj.GetType());
 
