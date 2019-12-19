@@ -56,7 +56,7 @@ namespace KeLi.RevitLoader.App.Entities
 
         public string Assembly { get; set; }
 
-        public string AddInId { get; set; }
+        public string ClientId { get; set; }
 
         public string FullClassName { get; set; }
 
