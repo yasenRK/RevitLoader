@@ -48,11 +48,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using KeLi.RevitLoader.App.Properties;
 using KeLi.RevitLoader.App.Utils;
 
 namespace KeLi.RevitLoader.App
@@ -72,7 +72,7 @@ namespace KeLi.RevitLoader.App
         {
             try
             {
-                GetAddins(Resources.MyAddin_Pattern).Run(args.Length > 0);
+                GetAddins().Run(args.Length > 0);
             }
             catch (Exception e)
             {
@@ -80,11 +80,11 @@ namespace KeLi.RevitLoader.App
             }
         }
 
-        private static AddinManager GetAddins(string addinPattern)
+        private static AddinManager GetAddins()
         {
             var addins = new AddinManager();
             var versionDlls = new Dictionary<int, string>();
-            var filePaths = Directory.GetFiles(CurrentFolder, addinPattern);
+            var filePaths = Directory.GetFiles(CurrentFolder, AddinNamePattern);
 
             foreach (var filePath in filePaths)
             {
@@ -98,7 +98,7 @@ namespace KeLi.RevitLoader.App
 
             addins.AddinEntries = versionDlls;
 
-            var addinFile = Path.Combine(CurrentFolder, AddinFilename);
+            var addinFile = Path.Combine(CurrentFolder, AddinFileName);
 
             if (File.Exists(addinFile))
                 addins.AddinFilePath = addinFile;

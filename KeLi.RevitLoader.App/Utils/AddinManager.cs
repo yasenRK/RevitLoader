@@ -77,10 +77,10 @@ namespace KeLi.RevitLoader.App.Utils
 
                 File.Copy(AddinFilePath, newAddinFile, true);
 
-                var addins = SerialUtils.GetObject<RevitAddIns>(newAddinFile);
+                var addins = SerialUtils.Deserialize<RevitAddIns>(newAddinFile);
 
                 addins.AddIn.Assembly = addinEntry.Value;
-                SerialUtils.ToFile(newAddinFile, addins);
+                SerialUtils.Serialize(newAddinFile, addins);
             }
         }
     }

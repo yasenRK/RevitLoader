@@ -54,7 +54,7 @@ namespace KeLi.RevitLoader.App.Utils
 {
     public class SerialUtils
     {
-        public static T GetObject<T>(string xmlFile)
+        public static T Deserialize<T>(string xmlFile)
         {
             if (xmlFile == null)
                 throw new ArgumentNullException(nameof(xmlFile));

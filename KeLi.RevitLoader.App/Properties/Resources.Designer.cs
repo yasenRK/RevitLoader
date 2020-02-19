@@ -59,23 +59,5 @@ namespace KeLi.RevitLoader.App.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to KeLi.XdbDataDumper*.dll.
-        /// </summary>
-        internal static string MyAddin_Pattern {
-            get {
-                return ResourceManager.GetString("MyAddin_Pattern", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Autodesk\Revit\Addins.
-        /// </summary>
-        internal static string Revit_Addins_Path {
-            get {
-                return ResourceManager.GetString("Revit_Addins_Path", resourceCulture);
-            }
-        }
     }
 }
