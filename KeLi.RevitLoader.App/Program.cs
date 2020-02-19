@@ -59,15 +59,14 @@ namespace KeLi.RevitLoader.App
 {
     public class Program
     {
-        public static NameValueCollection Setting = ConfigurationManager.AppSettings;
+        static Program()
+        {
+            AddinFilename = ConfigurationManager.AppSettings["addin"];
+        }
 
-        public static string AddinFileName => Setting["AddinFileName"];
+        private static string AddinFilename { get; }
 
-        public static string AddinNamePattern => Setting["AddinNamePattern"];
-
-        public static string AddinBaseDirPath => Setting["AddinBaseDirPath"];
-
-        public static string CurrentFolder { get; } = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        private static string CurrentFolder { get; } = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         private static void Main(string[] args)
         {
