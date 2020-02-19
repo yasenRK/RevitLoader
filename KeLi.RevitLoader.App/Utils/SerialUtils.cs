@@ -46,6 +46,7 @@
         /_==__==========__==_ooo__ooo=_/'   /___________,"
 */
 
+using System;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -55,18 +56,31 @@ namespace KeLi.RevitLoader.App.Utils
     {
         public static T GetObject<T>(string xmlFile)
         {
+            if (xmlFile == null)
+                throw new ArgumentNullException(nameof(xmlFile));
+
             var serializer = new XmlSerializer(typeof(T));
 
             using (var reader = new StreamReader(xmlFile))
+            {
                 return (T)serializer.Deserialize(reader);
+            }
         }
 
-        public static void ToFile(string xmlFile, object obj)
+        public static void ToFile<T>(string xmlFile, T t) where T: class
         {
-            var xs = new XmlSerializer(obj.GetType());
+            if (xmlFile == null)
+                throw new ArgumentNullException(nameof(xmlFile));
+
+            if (t == null)
+                throw new ArgumentNullException(nameof(t));
+
+            var xs = new XmlSerializer(t.GetType());
 
             using (var fs = new FileStream(xmlFile, FileMode.Create))
-                xs.Serialize(fs, obj);
+            {
+                xs.Serialize(fs, t);
+            }
         }
     }
 }

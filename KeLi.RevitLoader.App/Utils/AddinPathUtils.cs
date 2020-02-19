@@ -68,6 +68,9 @@ namespace KeLi.RevitLoader.App.Utils
 
         public static string GetAllUserPath(string revitVersion)
         {
+            if (revitVersion == null)
+                throw new ArgumentNullException(nameof(revitVersion));
+
             return Path.Combine(GetAllUserAppDataPath(), RevitFragment, revitVersion);
         }
 
@@ -78,6 +81,9 @@ namespace KeLi.RevitLoader.App.Utils
 
         public static string GetCurrentUserPath(string revitVersion)
         {
+            if (revitVersion == null)
+                throw new ArgumentNullException(nameof(revitVersion));
+
             var appData = GetCurrentUserAppDataPath();
             var dir = Path.Combine(appData, RevitFragment, revitVersion);
 
@@ -97,6 +103,12 @@ namespace KeLi.RevitLoader.App.Utils
 
         public static bool RemovePlugin(string version, string addinFilename, bool allUser = false)
         {
+            if (version == null)
+                throw new ArgumentNullException(nameof(version));
+
+            if (addinFilename == null)
+                throw new ArgumentNullException(nameof(addinFilename));
+
             if (allUser && !IsAdministrator())
                 return false;
 
