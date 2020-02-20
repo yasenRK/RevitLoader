@@ -52,9 +52,9 @@ using System.Xml.Serialization;
 
 namespace KeLi.RevitLoader.App.Utils
 {
-    public class SerialUtils
+    public class XmlUtil
     {
-        public static T Deserialize<T>(string xmlFile)
+        public static T Deserialize<T>(string xmlFile) where T : class
         {
             if (xmlFile == null)
                 throw new ArgumentNullException(nameof(xmlFile));
@@ -67,7 +67,7 @@ namespace KeLi.RevitLoader.App.Utils
             }
         }
 
-        public static void ToFile<T>(string xmlFile, T t) where T: class
+        public static void Serialize<T>(string xmlFile, T t) where T: class
         {
             if (xmlFile == null)
                 throw new ArgumentNullException(nameof(xmlFile));
