@@ -83,7 +83,7 @@ namespace KeLi.RevitLoader.App
 
             var addins = new AddinManager();
 
-            var versionDlls = new Dictionary<int, string>();
+            var assemblys = new Dictionary<int, string>();
 
             var filePaths = Directory.GetFiles(currentFolder, AppSettings["AddinPattern"]);
 
@@ -99,10 +99,10 @@ namespace KeLi.RevitLoader.App
                         continue;
                 }
 
-                versionDlls.Add(int.Parse(match.Groups[1].Value), filePath);
+                assemblys.Add(int.Parse(match.Groups[1].Value), filePath);
             }
 
-            addins.AddinEntries = versionDlls;
+            addins.AddinEntries = assemblys;
 
             var addinFile = Path.Combine(currentFolder, AppSettings["AddinFileName"]);
 
