@@ -51,7 +51,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
+
 using KeLi.RevitLoader.App.Utils;
+
 using static System.Configuration.ConfigurationManager;
 
 namespace KeLi.RevitLoader.App
@@ -78,7 +80,9 @@ namespace KeLi.RevitLoader.App
                 throw  new NullReferenceException(nameof(currentFolder));
 
             var addins = new AddinManager();
+
             var versionDlls = new Dictionary<int, string>();
+
             var filePaths = Directory.GetFiles(currentFolder, AppSettings["AddinPattern"]);
 
             foreach (var filePath in filePaths)

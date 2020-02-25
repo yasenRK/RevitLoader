@@ -48,6 +48,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+
 using KeLi.RevitLoader.App.Entities;
 
 namespace KeLi.RevitLoader.App.Utils
@@ -73,6 +74,10 @@ namespace KeLi.RevitLoader.App.Utils
             foreach (var addinEntry in AddinEntries)
             {
                 var addinFolder = AddinPathUtils.GetCurrentUserPath(addinEntry.Key.ToString());
+
+                if (addinFileName == null)
+                    continue;
+
                 var newAddinFile = Path.Combine(addinFolder, addinFileName);
 
                 File.Copy(AddinFilePath, newAddinFile, true);
