@@ -76,16 +76,16 @@ namespace KeLi.RevitLoader.App
 
         private static AddinManager GetAddins()
         {
-            var currentFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var currentDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            if (currentFolder == null)
-                throw  new NullReferenceException(nameof(currentFolder));
+            if (currentDir == null)
+                throw  new NullReferenceException(nameof(currentDir));
 
             var addins = new AddinManager();
 
             var assemblys = new Dictionary<int, string>();
 
-            var filePaths = Directory.GetFiles(currentFolder, AppSettings["AddinPattern"]);
+            var filePaths = Directory.GetFiles(currentDir, AppSettings["AssemblyPattern"]);
 
             foreach (var filePath in filePaths)
             {
@@ -104,7 +104,7 @@ namespace KeLi.RevitLoader.App
 
             addins.AddinEntries = assemblys;
 
-            var addinFile = Path.Combine(currentFolder, AppSettings["AddinFileName"]);
+            var addinFile = Path.Combine(currentDir, AppSettings["AddinFileName"]);
 
             if (File.Exists(addinFile))
                 addins.AddinFilePath = addinFile;
