@@ -51,6 +51,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 using KeLi.RevitLoader.App.Utils;
 
@@ -68,6 +69,7 @@ namespace KeLi.RevitLoader.App
             }
             catch (Exception e)
             {
+                Thread.Sleep(1000);
                 Console.WriteLine(e);
             }
         }
@@ -90,7 +92,12 @@ namespace KeLi.RevitLoader.App
                 var match = Regex.Match(filePath, @"(\d\d\d\d)\.dll$");
 
                 if (!match.Success)
-                    continue;
+                {
+                    match = Regex.Match(filePath, @"(\d\d\d\d)\.exe$");
+
+                    if (!match.Success)
+                        continue;
+                }
 
                 versionDlls.Add(int.Parse(match.Groups[1].Value), filePath);
             }

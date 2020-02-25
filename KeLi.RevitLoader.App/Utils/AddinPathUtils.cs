@@ -51,6 +51,7 @@ using System.IO;
 using System.Security.Principal;
 
 using static System.Configuration.ConfigurationManager;
+using static System.Environment.SpecialFolder;
 
 namespace KeLi.RevitLoader.App.Utils
 {
@@ -62,7 +63,7 @@ namespace KeLi.RevitLoader.App.Utils
 
         public static string GetAllUserAppDataPath()
         {
-            return AlluserPath ?? (AlluserPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));
+            return AlluserPath ?? (AlluserPath = Environment.GetFolderPath(CommonApplicationData));
         }
 
         public static string GetAllUserPath(string revitVersion)
@@ -75,7 +76,7 @@ namespace KeLi.RevitLoader.App.Utils
 
         public static string GetCurrentUserAppDataPath()
         {
-            return CurrentUserPath ?? (CurrentUserPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+            return CurrentUserPath ?? (CurrentUserPath = Environment.GetFolderPath(ApplicationData));
         }
 
         public static string GetCurrentUserPath(string revitVersion)
